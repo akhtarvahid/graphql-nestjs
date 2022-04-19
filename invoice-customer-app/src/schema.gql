@@ -1,0 +1,78 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CustomerType {
+  id: String!
+  name: String!
+  email: String!
+  phone: String!
+  address: String!
+  invoices: [InvoiceType!]
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Item {
+  description: String!
+  rate: Float!
+  quantity: Float!
+}
+
+type InvoiceType {
+  id: String!
+  invoiceNo: String!
+  description: String!
+  customer: CustomerType!
+  paymentStatus: String!
+  currency: String!
+  issueDate: String!
+  dueDate: String!
+  note: String!
+  items: [Item!]!
+  total: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  invoice(customerId: String!): InvoiceType!
+  invoices: [InvoiceType!]!
+  customer(id: String!): CustomerType!
+  customers: [CustomerType!]!
+}
+
+type Mutation {
+  createInvoice(invoice: CreateInvoiceInput!): InvoiceType!
+  createCustomer(create: CreateCustomerInput!): CustomerType!
+}
+
+input CreateInvoiceInput {
+  customer: String!
+  invoiceNo: String!
+  paymentStatus: String!
+  description: String!
+  currency: String!
+  issueDate: DateTime!
+  dueDate: DateTime!
+  note: String!
+  items: [ItemDTO!]!
+}
+
+input ItemDTO {
+  description: String!
+  rate: Float!
+  quantity: Float!
+}
+
+input CreateCustomerInput {
+  name: String!
+  email: String!
+  phone: String!
+  address: String!
+}
