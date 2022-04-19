@@ -41,7 +41,7 @@ type InvoiceType {
 }
 
 type Query {
-  invoice(customerId: String!): InvoiceType!
+  invoice(id: String!): InvoiceType!
   invoices: [InvoiceType!]!
   customer(id: String!): CustomerType!
   customers: [CustomerType!]!
