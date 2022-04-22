@@ -1,4 +1,4 @@
 # grqphql-nestjs > invoice-customer-app
-# Projects
+# Project
 
 > Invoice-customer-app
