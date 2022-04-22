@@ -1,0 +1,41 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AssignStudentsToSubjectInput {
+  subjectId: ID!
+  studentIds: [ID!]!
+}
+
+input CreateSubjectInput {
+  name: String!
+  startDate: String!
+  endDate: String!
+  students: [ID!] = []
+}
+
+type Mutation {
+  createSubject(createSubjectInput: CreateSubjectInput!): Subject!
+  assignStudentsToSubject(assignStudentsToSubjectInput: AssignStudentsToSubjectInput!): Subject!
+  createStudent(name: String!): Student!
+}
+
+type Query {
+  getSubjects: [Subject!]!
+  getSubject(id: String!): Subject!
+  getStudents: [Student!]!
+  getStudent(id: String!): Student!
+}
+
+type Student {
+  id: ID!
+  name: String!
+}
+
+type Subject {
+  id: ID!
+  name: String!
+  startDate: String!
+  endDate: String!
+  students: [Student!]!
+}
