@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StudentEntity } from './student.entity';
 import { v4 as uuid } from 'uuid';
+import { CreateStudentInput } from './student.graphql';
 
 @Injectable()
 export class StudentService {
@@ -11,10 +12,12 @@ export class StudentService {
     private studentRepository: Repository<StudentEntity>,
   ) {}
 
-  async create(name: string): Promise<StudentEntity> {
+  async create(createStudentInput: CreateStudentInput): Promise<StudentEntity> {
+    const { name, contactNo } = createStudentInput;
     const student = this.studentRepository.create({
       id: uuid(),
       name,
+      contactNo,
     });
 
     return this.studentRepository.save(student);
@@ -29,12 +32,6 @@ export class StudentService {
   }
 
   async getManyStudents(studentIds: string[]): Promise<StudentEntity[]> {
-    // const result = [];
-    // for (let i = 0; i < studentIds?.length - 1; i++) {
-    //   result.push(
-    //     await this.studentRepository.findOneBy({ id: studentIds[i] }),
-    //   );
-    // }
     return this.studentRepository.find({
       where: {
         id: {

@@ -7,6 +7,11 @@ input AssignStudentsToSubjectInput {
   studentIds: [ID!]!
 }
 
+input CreateStudentInput {
+  name: String!
+  contactNo: String!
+}
+
 input CreateSubjectInput {
   name: String!
   startDate: String!
@@ -17,7 +22,7 @@ input CreateSubjectInput {
 type Mutation {
   createSubject(createSubjectInput: CreateSubjectInput!): Subject!
   assignStudentsToSubject(assignStudentsToSubjectInput: AssignStudentsToSubjectInput!): Subject!
-  createStudent(name: String!): Student!
+  createStudent(createStudentInput: CreateStudentInput!): Student!
 }
 
 type Query {
@@ -30,6 +35,7 @@ type Query {
 type Student {
   id: ID!
   name: String!
+  contactNo: String!
 }
 
 type Subject {
