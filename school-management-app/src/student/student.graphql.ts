@@ -12,6 +12,12 @@ export class StudentType {
   @Field()
   @IsNotEmpty()
   contactNo: string;
+
+  @Field()
+  address: string;
+
+  @Field()
+  nationality: string;
 }
 
 @InputType()
@@ -22,4 +28,11 @@ export class CreateStudentInput {
   @Field()
   @MinLength(10)
   contactNo: string;
+
+  @Field()
+  @MaxLength(100)
+  address: string;
+
+  @Field()
+  nationality: string;
 }

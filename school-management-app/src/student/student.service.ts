@@ -13,11 +13,9 @@ export class StudentService {
   ) {}
 
   async create(createStudentInput: CreateStudentInput): Promise<StudentEntity> {
-    const { name, contactNo } = createStudentInput;
     const student = this.studentRepository.create({
       id: uuid(),
-      name,
-      contactNo,
+      ...createStudentInput
     });
 
     return this.studentRepository.save(student);
