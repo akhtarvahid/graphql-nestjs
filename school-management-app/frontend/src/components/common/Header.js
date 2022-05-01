@@ -1,5 +1,5 @@
 import { PageHeader } from 'antd';
-import '../../app.css';
+import '../../app.scss';
 
 const Header = () => (
   <PageHeader
