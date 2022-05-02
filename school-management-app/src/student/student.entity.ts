@@ -15,6 +15,9 @@ export class StudentEntity {
   contactNo: string;
 
   @Column()
+  email: string;
+
+  @Column()
   address: string;
 
   @Column()

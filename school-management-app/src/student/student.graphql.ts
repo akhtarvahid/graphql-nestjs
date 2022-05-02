@@ -1,5 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 @ObjectType('Student')
 export class StudentType {
@@ -12,6 +12,10 @@ export class StudentType {
   @Field()
   @IsNotEmpty()
   contactNo: string;
+
+  @Field()
+  @IsEmail()
+  email: string;
 
   @Field()
   address: string;
@@ -28,6 +32,10 @@ export class CreateStudentInput {
   @Field()
   @MinLength(10)
   contactNo: string;
+
+  @Field()
+  @IsEmail()
+  email: string;
 
   @Field()
   @MaxLength(100)

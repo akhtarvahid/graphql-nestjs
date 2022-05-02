@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StudentEntity } from './student.entity';
@@ -13,9 +13,14 @@ export class StudentService {
   ) {}
 
   async create(createStudentInput: CreateStudentInput): Promise<StudentEntity> {
+    const found = await this.students();
+    if (found && found.some((f) => f.email === createStudentInput.email)) {
+      throw new ConflictException('User already exist with this email');
+    }
+
     const student = this.studentRepository.create({
       id: uuid(),
-      ...createStudentInput
+      ...createStudentInput,
     });
 
     return this.studentRepository.save(student);

@@ -10,6 +10,7 @@ input AssignStudentsToSubjectInput {
 input CreateStudentInput {
   name: String!
   contactNo: String!
+  email: String!
   address: String!
   nationality: String!
 }
@@ -38,6 +39,7 @@ type Student {
   id: ID!
   name: String!
   contactNo: String!
+  email: String!
   address: String!
   nationality: String!
 }

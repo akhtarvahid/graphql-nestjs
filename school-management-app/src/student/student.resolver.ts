@@ -8,7 +8,9 @@ export class StudentResolver {
   @Inject() studentService: StudentService;
 
   @Mutation((type) => StudentType)
-  createStudent(@Args('createStudentInput') createStudentInput: CreateStudentInput ) {
+  createStudent(
+    @Args('createStudentInput') createStudentInput: CreateStudentInput,
+  ) {
     return this.studentService.create(createStudentInput);
   }
 
