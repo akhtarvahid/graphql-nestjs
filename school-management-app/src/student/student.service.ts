@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StudentEntity } from './student.entity';
@@ -31,7 +35,11 @@ export class StudentService {
   }
 
   async student(id: string): Promise<StudentEntity> {
-    return this.studentRepository.findOne({ id });
+    const found = await this.studentRepository.findOne({ id });
+    if (!found) {
+      throw new NotFoundException(`User doesn't exist with ${id}`);
+    }
+    return found;
   }
 
   async getManyStudents(studentIds: string[]): Promise<StudentEntity[]> {
