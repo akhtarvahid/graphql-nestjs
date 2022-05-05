@@ -18,7 +18,10 @@ export class StudentService {
 
   async create(createStudentInput: CreateStudentInput): Promise<StudentEntity> {
     const found = await this.students();
-    if (found && found.some((f) => f.email === createStudentInput.email)) {
+    const isUserExist = found?.some(
+      ({ email }) => email === createStudentInput?.email,
+    );
+    if (found && isUserExist) {
       throw new ConflictException('User already exist with this email');
     }
 

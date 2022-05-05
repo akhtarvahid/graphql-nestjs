@@ -10,11 +10,9 @@ export class StudentType {
   name: string;
 
   @Field()
-  @IsNotEmpty()
   contactNo: string;
 
   @Field()
-  @IsEmail()
   email: string;
 
   @Field()
@@ -22,6 +20,12 @@ export class StudentType {
 
   @Field()
   nationality: string;
+
+  @Field()
+  createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
 }
 
 @InputType()
