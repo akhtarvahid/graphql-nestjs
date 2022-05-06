@@ -1,6 +1,40 @@
 .site-page-header {
     border: 1px solid rgb(235, 237, 240);
-    & .ant-page-header-heading-left {
-    display: flex;
+& .ant-page {
+  &-header-back {
+    margin-right: 20px;
+    display: none;
   }
+  &-header {
+    &-heading-left {
+      display: flex;
+      background: #05306091;
+      color: #7acf18;
+      padding: 22px 75px;
+    }
+    &-heading-title {
+      position: relative;
+      &::before {
+        position: absolute;
+        left: -50px;
+        top: -8px;
+        content: "";
+        height: 40px;
+        width: 40px;
+        background-image: url('https://w7.pngwing.com/pngs/696/133/png-transparent-computer-icons-e-book-book-angle-rectangle-stack.png');
+        background-size: contain;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+}
+.ant-layout-content {
+  height: 100vh;
+  background-color: #6e86a291;
+}
+.ant-layout-footer {
+  background-color: #05306091;
+  color: rgb(247, 226, 226);
+  padding: 20px;
 }

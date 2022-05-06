@@ -3,6 +3,9 @@ import { NetworkStatus, useQuery } from "@apollo/client";
 import { STUDENTS } from './grahpql/students';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/common/Header';
+import FooterPage from './components/common/Footer';
+import { Layout } from 'antd';
+const { Content } = Layout;
 
 function App() {
 
@@ -27,18 +30,22 @@ function App() {
   return (
     <>
     <Header />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route
-        path="/:id"
-        element={<UserProfile />}
-      />
-    </Routes>
+    <ContentPage />
+    <FooterPage />
     </>
   )
 }
 
 export default App;
 
+const ContentPage = () => (<Content>
+  <Routes>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/:id"
+        element={<UserProfile />}
+      />
+    </Routes>
+</Content>)
 const Home = () => <div>Home</div>
 const UserProfile = () => <div>UserProfile</div>
