@@ -7,4 +7,16 @@ export class TaskType {
 
     @Field()
     title: string;
+
+    @Field()
+    description: string;
+
+    @Field()
+    status: TaskStatus;
+}
+
+enum TaskStatus {
+    OPEN = 'OPEN',
+    IN_PROGRESS = 'IN_PROGRESS',
+    DONE = 'DONE'
 }

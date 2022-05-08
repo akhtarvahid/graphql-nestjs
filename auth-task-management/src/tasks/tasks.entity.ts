@@ -7,4 +7,10 @@ export class TasksEntity {
 
     @Column()
     title: string;
+    
+    @Column()
+    description: string;
+
+    @Column()
+    status: string;
 }
