@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreateTaskInput, DeleteTask, TaskStatus, TaskType } from './tasks.graphql';
+import { CreateTaskInput, DeleteTask, TaskType } from './tasks.graphql';
 import { TasksService } from './tasks.service';
 
 @Resolver('Tasks')
