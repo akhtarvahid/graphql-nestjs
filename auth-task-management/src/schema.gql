@@ -1,0 +1,12 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type TaskType {
+  id: String!
+  title: String!
+}
+
+type Query {
+  getTasks: [TaskType!]!
+}
