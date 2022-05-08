@@ -5,8 +5,25 @@
 type TaskType {
   id: String!
   title: String!
+  description: String!
+  status: String!
+}
+
+type DeleteTask {
+  message: String!
 }
 
 type Query {
   getTasks: [TaskType!]!
+  getTask(id: String!): TaskType!
+}
+
+type Mutation {
+  createTask(create: CreateTaskInput!): TaskType!
+  deleteTask(id: String!): DeleteTask!
+}
+
+input CreateTaskInput {
+  title: String!
+  description: String!
 }
