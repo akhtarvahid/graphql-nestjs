@@ -13,6 +13,12 @@ export class TaskType {
 
     @Field()
     status: string;
+
+    @Field()
+    createdAt: Date;
+  
+    @Field()
+    updatedAt: Date;
 }
 
 export enum TaskStatus {
