@@ -5,6 +5,8 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/common/Header';
 import FooterPage from './components/common/Footer';
 import { Layout } from 'antd';
+import Home from './components/Home';
+import 'antd/dist/antd.css';
 const { Content } = Layout;
 
 function App() {
@@ -37,7 +39,6 @@ function App() {
 }
 
 export default App;
-
 const ContentPage = () => (<Content>
   <Routes>
       <Route path="/" element={<Home />} />
@@ -47,5 +48,4 @@ const ContentPage = () => (<Content>
       />
     </Routes>
 </Content>)
-const Home = () => <div>Home</div>
 const UserProfile = () => <div>UserProfile</div>
