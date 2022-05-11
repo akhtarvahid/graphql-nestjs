@@ -41,3 +41,12 @@ export class DeleteTask{
     @Field()
     message: string
 }
+
+@InputType()
+export class UpdateTaskStatusInput {
+    @Field()
+    id: string;
+
+    @Field()
+    status: TaskStatus;
+}
