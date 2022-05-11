@@ -28,7 +28,7 @@ export class TasksResolver {
     }
 
     @Mutation(_type=> TaskType)
-    updateTaskStatus(@Args('id') updateTaskStatus: UpdateTaskStatusInput) {
+    updateTaskStatus(@Args('update') updateTaskStatus: UpdateTaskStatusInput) {
         return this.taskService.updateTaskByStatus(updateTaskStatus);
     }
 }
