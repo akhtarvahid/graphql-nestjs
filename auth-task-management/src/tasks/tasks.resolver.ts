@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreateTaskInput, DeleteTask, TaskType } from './tasks.graphql';
+import { CreateTaskInput, DeleteTask, TaskStatus, TaskType } from './tasks.graphql';
 import { TasksService } from './tasks.service';
 
 @Resolver('Tasks')
@@ -25,5 +25,10 @@ export class TasksResolver {
     @Mutation(_type=> DeleteTask)
     deleteTask(@Args('id') id: string) {
         return this.taskService.deleteTask(id);
+    }
+
+    @Mutation(_type=> TaskType)
+    updateTaskStatus(@Args('id') id: string, @Args('status') status: TaskStatus) {
+        return this.taskService.updateTaskByStatus(id, status);
     }
 }

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TasksEntity } from './tasks.entity';
 import { v4 as uuid } from 'uuid';
-import { CreateTaskInput, DeleteTask } from './tasks.graphql';
+import { CreateTaskInput, DeleteTask, TaskStatus } from './tasks.graphql';
 @Injectable()
 export class TasksService {
     constructor(@InjectRepository(TasksEntity) private taskRepository: Repository<TasksEntity>){}
@@ -32,5 +32,10 @@ export class TasksService {
          return { 
              message: `${id} deleted successfully.`
         }
+    }
+    async updateTaskByStatus(id: string, status: TaskStatus): Promise<TasksEntity> {
+        const task = await this.taskRepository.findOne({ id });
+        task.status = status;
+        return this.taskRepository.save(task)
     }
 }
