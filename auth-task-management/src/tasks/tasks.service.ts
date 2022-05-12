@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TasksEntity } from './tasks.entity';
 import { v4 as uuid } from 'uuid';
-import { CreateTaskInput, DeleteTask, TaskStatus, UpdateTaskStatusInput } from './tasks.graphql';
+import { CreateTaskInput, DeleteTask, FilterAndSearch, TaskStatus, UpdateTaskStatusInput } from './tasks.graphql';
 @Injectable()
 export class TasksService {
     constructor(@InjectRepository(TasksEntity) private taskRepository: Repository<TasksEntity>){}
@@ -19,7 +19,8 @@ export class TasksService {
         return this.taskRepository.save(task);
     }
 
-    async getTasks(status: TaskStatus, search: string): Promise<TasksEntity[]> {
+    async getTasks(filterAndSearch: FilterAndSearch): Promise<TasksEntity[]> {
+       const { status, search } = filterAndSearch
        const tasks = await this.taskRepository.find();
        if(search && status) {
            return tasks.filter(task => task.title.includes(search) && task.status === status);

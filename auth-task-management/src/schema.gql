@@ -21,8 +21,13 @@ type DeleteTask {
 }
 
 type Query {
-  getTasks(status: String!, search: String!): [TaskType!]!
+  getTasks(filterAndSearch: FilterAndSearch!): [TaskType!]!
   getTask(id: String!): TaskType!
+}
+
+input FilterAndSearch {
+  status: String!
+  search: String!
 }
 
 type Mutation {

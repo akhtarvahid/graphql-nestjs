@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreateTaskInput, DeleteTask, TaskStatus, TaskType, UpdateTaskStatusInput } from './tasks.graphql';
+import { CreateTaskInput, DeleteTask, FilterAndSearch, TaskStatus, TaskType, UpdateTaskStatusInput } from './tasks.graphql';
 import { TasksService } from './tasks.service';
 
 @Resolver('Tasks')
@@ -13,8 +13,8 @@ export class TasksResolver {
     }
 
     @Query(_type=> [TaskType])
-    getTasks(@Args('status') status: TaskStatus, @Args('search') search: string) {
-        return this.taskService.getTasks(status, search);
+    getTasks(@Args('filterAndSearch') filterAndSearch: FilterAndSearch) {
+        return this.taskService.getTasks(filterAndSearch);
     }
 
     @Query(_type=> TaskType)

@@ -50,3 +50,11 @@ export class UpdateTaskStatusInput {
     @Field()
     status: TaskStatus;
 }
+@InputType()
+export class FilterAndSearch {
+    @Field()
+    status?: TaskStatus;
+
+    @Field()
+    search?: string;
+}
