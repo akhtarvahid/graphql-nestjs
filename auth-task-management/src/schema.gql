@@ -21,7 +21,7 @@ type DeleteTask {
 }
 
 type Query {
-  getTasks: [TaskType!]!
+  getTasks(status: String!, search: String!): [TaskType!]!
   getTask(id: String!): TaskType!
 }
 

@@ -19,8 +19,19 @@ export class TasksService {
         return this.taskRepository.save(task);
     }
 
-    async getTasks(): Promise<TasksEntity[]> {
-        return this.taskRepository.find();
+    async getTasks(status: TaskStatus, search: string): Promise<TasksEntity[]> {
+       const tasks = await this.taskRepository.find();
+       if(search && status) {
+           return tasks.filter(task => task.title.includes(search) && task.status === status);
+       }
+        if(search) {
+            return tasks.filter(task => task.title.includes(search));
+        }
+        if(status) {
+            return tasks.filter(task => task.status === status);
+        }
+
+        return tasks;
     }
 
     async getTask(id: string): Promise<TasksEntity> {

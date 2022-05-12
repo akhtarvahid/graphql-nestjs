@@ -13,8 +13,8 @@ export class TasksResolver {
     }
 
     @Query(_type=> [TaskType])
-    getTasks() {
-        return this.taskService.getTasks();
+    getTasks(@Args('status') status: TaskStatus, @Args('search') search: string) {
+        return this.taskService.getTasks(status, search);
     }
 
     @Query(_type=> TaskType)
