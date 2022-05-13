@@ -21,15 +21,15 @@ export class TasksService {
 
     async getTasks(filterAndSearch: FilterAndSearch): Promise<TasksEntity[]> {
        const { status, search } = filterAndSearch
-       const tasks = await this.taskRepository.find();
+       let tasks = await this.taskRepository.find();
        if(search && status) {
-           return tasks.filter(task => task.title.includes(search) && task.status === status);
+           tasks = tasks.filter(task => task.title.includes(search) && task.status === status);
        }
         if(search) {
-            return tasks.filter(task => task.title.includes(search));
+            tasks = tasks.filter(task => task.title.includes(search) || task.description.includes(search));
         }
         if(status) {
-            return tasks.filter(task => task.status === status);
+            tasks = tasks.filter(task => task.status === status);
         }
 
         return tasks;
