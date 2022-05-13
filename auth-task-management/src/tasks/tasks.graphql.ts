@@ -1,4 +1,5 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
+import { IsOptional } from "class-validator";
 
 @ObjectType()
 export class TaskType {
@@ -50,11 +51,13 @@ export class UpdateTaskStatusInput {
     @Field()
     status: TaskStatus;
 }
+
 @InputType()
 export class FilterAndSearch {
-    @Field()
-    status?: TaskStatus;
 
-    @Field()
-    search?: string;
+    @Field(() => String , { nullable: true })
+    status: TaskStatus;
+
+    @Field(() => String, { nullable: true })
+    search: string;
 }

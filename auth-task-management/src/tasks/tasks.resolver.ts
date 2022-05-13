@@ -14,7 +14,12 @@ export class TasksResolver {
 
     @Query(_type=> [TaskType])
     getTasks(@Args('filterAndSearch') filterAndSearch: FilterAndSearch) {
-        return this.taskService.getTasks(filterAndSearch);
+
+        if(Object.keys(filterAndSearch)?.length !== 0) {
+           return this.taskService.getTasksWithFilterAndSearch(filterAndSearch);
+        }
+
+        return this.taskService.getTasks();
     }
 
     @Query(_type=> TaskType)

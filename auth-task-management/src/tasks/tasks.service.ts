@@ -19,20 +19,27 @@ export class TasksService {
         return this.taskRepository.save(task);
     }
 
-    async getTasks(filterAndSearch: FilterAndSearch): Promise<TasksEntity[]> {
-       const { status, search } = filterAndSearch
-       let tasks = await this.taskRepository.find();
-       if(search && status) {
-           tasks = tasks.filter(task => task.title.includes(search) && task.status === status);
-       }
-        if(search) {
-            tasks = tasks.filter(task => task.title.includes(search) || task.description.includes(search));
-        }
-        if(status) {
-            tasks = tasks.filter(task => task.status === status);
-        }
+    async getTasks(): Promise<TasksEntity[]> {
+       return this.taskRepository.find();
+    }
 
-        return tasks;
+    async getTasksWithFilterAndSearch(filterAndSearch: FilterAndSearch): Promise<TasksEntity[]> {
+        const { status, search } = filterAndSearch
+        let tasks = await this.taskRepository.find();
+        
+        if(search && status) {
+            tasks = tasks.filter(task => task.title.includes(search) && task.status === status);
+        }
+        
+        if(search) {
+             tasks = tasks.filter(task => task.title.includes(search) || task.description.includes(search));
+        }
+        
+        if(status) {
+             tasks = tasks.filter(task => task.status === status);
+        }
+ 
+         return tasks;
     }
 
     async getTask(id: string): Promise<TasksEntity> {
