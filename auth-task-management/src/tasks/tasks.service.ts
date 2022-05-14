@@ -26,13 +26,20 @@ export class TasksService {
     async getTasksWithFilterAndSearch(filterAndSearch: FilterAndSearch): Promise<TasksEntity[]> {
         const { status, search } = filterAndSearch
         let tasks = await this.taskRepository.find();
+        const inputText = search.toLocaleLowerCase();
+        const searchedInput = (text) => text.toLocaleLowerCase().includes(inputText);
         
         if(search && status) {
-            tasks = tasks.filter(task => task.title.includes(search) && task.status === status);
+            tasks = tasks.filter(task => {
+                return task.status === status && 
+                (searchedInput(task.title) || searchedInput(task.description))
+            });
         }
         
         if(search) {
-             tasks = tasks.filter(task => task.title.includes(search) || task.description.includes(search));
+             tasks = tasks.filter(({ title, description }) => {
+                 return searchedInput(title) || searchedInput(description)
+             });
         }
         
         if(status) {
