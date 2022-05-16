@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
-import { IsOptional } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
 
 @ObjectType()
 export class TaskType {
@@ -31,9 +31,11 @@ export enum TaskStatus {
 @InputType()
 export class CreateTaskInput {
     @Field()
+    @IsNotEmpty()
     title: string;
 
     @Field()
+    @IsNotEmpty()
     description: string;
 }
 
