@@ -60,10 +60,14 @@ export class TasksService {
     }
 
     async deleteTask(id: string): Promise<DeleteTask> {
-         await this.taskRepository.delete({ id })
+
+       const found = await this.getTask(id);
+       if(found) {
+         await this.taskRepository.delete({ id });
          return { 
-             message: `${id} deleted successfully.`
-        }
+            message: `${id} deleted successfully.`
+         }
+       }
     }
     async updateTaskByStatus(updateTaskStatus: UpdateTaskStatusInput): Promise<TasksEntity> {
         const { id } = updateTaskStatus;
