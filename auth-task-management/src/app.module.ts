@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TasksEntity } from './tasks/tasks.entity';
 import { TasksModule } from './tasks/tasks.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { TasksModule } from './tasks/tasks.module';
       entities: ['dist/**/*.entity.js'],
       synchronize: true,
     }),
-    TasksModule
+    TasksModule,
+    AuthModule
   ],
 })
 export class AppModule {}
