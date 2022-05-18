@@ -16,7 +16,8 @@ export class TasksService {
           title,
           description
         });
-        return this.taskRepository.save(task);
+        await this.taskRepository.save(task);
+        return task;
     }
 
     async getTasks(): Promise<TasksEntity[]> {
@@ -24,29 +25,22 @@ export class TasksService {
     }
 
     async getTasksWithFilterAndSearch(filterAndSearch: FilterAndSearch): Promise<TasksEntity[]> {
-        const { status, search } = filterAndSearch
-        let tasks = await this.taskRepository.find();
-        const inputText = search.toLocaleLowerCase();
-        const searchedInput = (text) => text.toLocaleLowerCase().includes(inputText);
-        
-        if(search && status) {
-            tasks = tasks.filter(task => {
-                return task.status === status && 
-                (searchedInput(task.title) || searchedInput(task.description))
-            });
-        }
-        
-        if(search) {
-             tasks = tasks.filter(({ title, description }) => {
-                 return searchedInput(title) || searchedInput(description)
-             });
-        }
-        
-        if(status) {
-             tasks = tasks.filter(task => task.status === status);
-        }
- 
-         return tasks;
+      const { status, search } = filterAndSearch;
+
+      const query = this.taskRepository.createQueryBuilder('task');
+     
+      if(status) {
+        query.andWhere('task.status = :status', { status })
+      }
+      if(search) {
+          query.andWhere(
+              'LOWER(task.title) LIKE LOWER(:search) OR LOWER(task.description) LIKE LOWER(:search)',
+              { search: `%${search}%`},
+          )
+      }
+
+      const tasks = await query.getMany();
+      return tasks;
     }
 
     async getTask(id: string): Promise<TasksEntity> {
@@ -70,9 +64,10 @@ export class TasksService {
        }
     }
     async updateTaskByStatus(updateTaskStatus: UpdateTaskStatusInput): Promise<TasksEntity> {
-        const { id } = updateTaskStatus;
-        const task = await this.getTask(id);
+        const task = await this.getTask(updateTaskStatus.id);
         task.status = updateTaskStatus.status;
-        return this.taskRepository.save(task)
+        await this.taskRepository.save(task);
+        
+        return task;
     }
 }
