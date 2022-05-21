@@ -20,6 +20,11 @@ type DeleteTask {
   message: String!
 }
 
+type AuthType {
+  username: String!
+  password: String!
+}
+
 type Query {
   getTasks(filterAndSearch: FilterAndSearch!): [TaskType!]!
   getTask(id: String!): TaskType!
@@ -34,6 +39,7 @@ type Mutation {
   createTask(create: CreateTaskInput!): TaskType!
   deleteTask(id: String!): DeleteTask!
   updateTaskStatus(update: UpdateTaskStatusInput!): TaskType!
+  create(username: String!, password: String!): AuthType!
 }
 
 input CreateTaskInput {
