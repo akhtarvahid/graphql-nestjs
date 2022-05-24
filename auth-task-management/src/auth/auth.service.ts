@@ -8,7 +8,7 @@ import { AuthCreateInput } from './auth.graphql';
 export class AuthService {
     constructor(@InjectRepository(AuthEntity) private authRepository: Repository<AuthEntity>) {}
 
-    async createUser(userInput: AuthCreateInput): Promise<void> {
+    async createUser(userInput: AuthCreateInput): Promise<AuthEntity> {
       const { username, password } = userInput;
       const user = this.authRepository.create({
           username,
@@ -16,5 +16,6 @@ export class AuthService {
       })
 
       await this.authRepository.save(user);
+      return user;
     }
 }

@@ -9,6 +9,6 @@ export class AuthResolver {
 
     @Mutation(_=> AuthType)
     signUp(@Args('signUp') signUpUser: AuthCreateInput)  {
-        this.authService.createUser(signUpUser);
+        return this.authService.createUser(signUpUser);
     }
 }
