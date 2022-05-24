@@ -39,7 +39,7 @@ type Mutation {
   createTask(create: CreateTaskInput!): TaskType!
   deleteTask(id: String!): DeleteTask!
   updateTaskStatus(update: UpdateTaskStatusInput!): TaskType!
-  create(username: String!, password: String!): AuthType!
+  signUp(signUp: AuthCreateInput!): AuthType!
 }
 
 input CreateTaskInput {
@@ -50,4 +50,9 @@ input CreateTaskInput {
 input UpdateTaskStatusInput {
   id: String!
   status: String!
+}
+
+input AuthCreateInput {
+  username: String!
+  password: String!
 }
