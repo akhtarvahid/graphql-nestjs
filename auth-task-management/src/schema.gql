@@ -22,7 +22,6 @@ type DeleteTask {
 
 type AuthType {
   username: String!
-  password: String!
 }
 
 type Query {
