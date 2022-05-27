@@ -1,5 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import { IsEmail, IsOptional, MaxLength, MinLength } from 'class-validator';
 
 @ObjectType('Student')
 export class StudentType {
@@ -46,5 +46,6 @@ export class CreateStudentInput {
   address: string;
 
   @Field()
-  nationality: string;
+  @IsOptional()
+  nationality?: string;
 }

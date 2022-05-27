@@ -2,11 +2,31 @@ import { Form, Input, Button } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import './home.scss';
+import { useMutation } from '@apollo/client';
+import { CREATE_STUDENT } from '../grahpql/students';
+import Loader from './Loader';
 
 const Home = () => {
+
+  const [createStudent, { error, loading: createStudentLoading}] = useMutation(CREATE_STUDENT);
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    const student = {
+      name: values.name,
+      contactNo: values.contactNo,
+      email: values.email,
+      address: values.address,
+      nationality: ""
+    }
+    createStudent({
+      variables: {
+        createStudentInput: student
+      }
+    })
   };
+
+  if(createStudentLoading) {
+    return <Loader />
+  }
 
   return (
     <Form
@@ -34,7 +54,7 @@ const Home = () => {
       </Form.Item>
 
       <Form.Item
-        name="contact no."
+        name="contactNo"
         rules={[
           {
             required: true,
@@ -68,13 +88,11 @@ const Home = () => {
         name="address"
         rules={[
           {
-            required: true,
             message: 'Please input your address!',
           },
         ]}
       >
         <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
           type="text"
           placeholder="Address"
         />
