@@ -30,7 +30,7 @@ export class AuthService {
       return signedUser;
     }
 
-    async signInUser(signInput: AuthCreateInput) {
+    async signInUser(signInput: AuthCreateInput): Promise<string> {
       const { username, password } = signInput;
       const user = await this.authRepository.findOne({ username });
 
