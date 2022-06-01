@@ -1,7 +1,8 @@
 import { Inject } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { AuthCreateInput, AuthType } from './auth.graphql';
+import { AuthCreateInput, AuthType, TokenType } from './auth.graphql';
 import { AuthService } from './auth.service';
+
 
 @Resolver()
 export class AuthResolver {
@@ -12,7 +13,7 @@ export class AuthResolver {
         return this.authService.createUser(signUpUser);
     }
 
-    @Mutation(_=> String)
+    @Mutation(_=> TokenType)
     signIn(@Args('signIn') signIn: AuthCreateInput) {
         return this.authService.signInUser(signIn);
     }

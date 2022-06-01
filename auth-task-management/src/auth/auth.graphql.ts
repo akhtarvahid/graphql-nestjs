@@ -24,3 +24,9 @@ export class AuthCreateInput {
     })
     password: string;
 }
+
+@ObjectType()
+export class TokenType {
+    @Field()
+    accessToken: string
+}

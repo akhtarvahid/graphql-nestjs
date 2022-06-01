@@ -24,6 +24,10 @@ type AuthType {
   username: String!
 }
 
+type TokenType {
+  accessToken: String!
+}
+
 type Query {
   getTasks(filterAndSearch: FilterAndSearch!): [TaskType!]!
   getTask(id: String!): TaskType!
@@ -39,7 +43,7 @@ type Mutation {
   deleteTask(id: String!): DeleteTask!
   updateTaskStatus(update: UpdateTaskStatusInput!): TaskType!
   signUp(signUp: AuthCreateInput!): AuthType!
-  signIn(signIn: AuthCreateInput!): String!
+  signIn(signIn: AuthCreateInput!): TokenType!
 }
 
 input CreateTaskInput {
