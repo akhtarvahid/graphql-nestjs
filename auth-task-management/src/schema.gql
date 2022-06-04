@@ -44,6 +44,7 @@ type Mutation {
   updateTaskStatus(update: UpdateTaskStatusInput!): TaskType!
   signUp(signUp: AuthCreateInput!): AuthType!
   signIn(signIn: AuthCreateInput!): TokenType!
+  test(signIn: AuthCreateInput!): String!
 }
 
 input CreateTaskInput {

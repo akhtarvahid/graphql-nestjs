@@ -3,7 +3,6 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthCreateInput, AuthType, TokenType } from './auth.graphql';
 import { AuthService } from './auth.service';
 
-
 @Resolver()
 export class AuthResolver {
     @Inject() authService: AuthService;
