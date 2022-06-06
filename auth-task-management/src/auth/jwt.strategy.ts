@@ -14,11 +14,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         secretOrKey: 'topSecret51',
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       });
+      console.log('constructor called')
   }
-
   async validate(payload: JwtPayload): Promise<AuthEntity> {
+    console.log('fn called');
+
     const { username } = payload;
-    const user: AuthEntity = await this.authRepository.findOne({ username });
+    const user: AuthEntity = await this.authRepository.findOne({
+      where: {
+        username,
+      }
+    })
     if(!user) {
       throw new UnauthorizedException();
     }

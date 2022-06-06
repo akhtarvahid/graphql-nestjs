@@ -1,9 +1,11 @@
-import { Inject } from '@nestjs/common';
+import { Inject, UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateTaskInput, DeleteTask, FilterAndSearch, TaskStatus, TaskType, UpdateTaskStatusInput } from './tasks.graphql';
 import { TasksService } from './tasks.service';
 
 @Resolver('Tasks')
+@UseGuards(AuthGuard())
 export class TasksResolver {
     @Inject() taskService: TasksService;
 
