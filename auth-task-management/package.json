@@ -36,6 +36,7 @@
     "class-validator": "^0.13.2",
     "graphql": "^16.4.0",
     "graphql-tools": "^8.2.8",
+    "jsonwebtoken": "^8.5.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "pg": "^8.7.3",
