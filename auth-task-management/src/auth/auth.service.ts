@@ -26,7 +26,7 @@ export class AuthService {
           password: hashedPassword
        })
        await this.authRepository.save(signedUser);
-      }catch(err) {
+      } catch(err) {
         if(err.code === '23505') {
           throw new ConflictException('User already exists');
         } else {
