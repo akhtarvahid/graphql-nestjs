@@ -20,6 +20,7 @@ export class AuthService {
       const { username, password } = userInput;
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
+      
       try {
         signedUser = this.authRepository.create({
           username,
