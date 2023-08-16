@@ -31,13 +31,13 @@ export class BlogService {
     }
 
    async updateBlog(id: string, title: string, description: string, image: string, author: string): Promise<BlogEntity> {
-      const getToUpdate = await this.getBlog(id);
+      const blog = await this.getBlog(id);
 
-      getToUpdate.title = title;
-      getToUpdate.description = description;
-      getToUpdate.image = image;
-      getToUpdate.author = author;
+      blog.title = title;
+      blog.description = description;
+      blog.image = image;
+      blog.author = author;
 
-      return this.blogRepository.save(getToUpdate);
+      return this.blogRepository.save(blog);
    }
 }
