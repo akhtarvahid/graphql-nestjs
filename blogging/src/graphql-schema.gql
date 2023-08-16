@@ -13,7 +13,7 @@ type Blog {
 }
 
 type Query {
-  blog: Blog!
+  blog(id: String!): Blog!
   blogs: [Blog!]!
 }
 

@@ -12,6 +12,9 @@ export class BlogService {
     async getBlogs(): Promise<BlogEntity[]> {
       return this.blogRepository.find({});
     }
+    async getBlog(id: string): Promise<BlogEntity> {
+        return this.blogRepository.findOneBy({ id });
+    }
 
     async createBlog(title: string, description: string, image: string, author: string): Promise<BlogEntity> {
         const blog = this.blogRepository.create({

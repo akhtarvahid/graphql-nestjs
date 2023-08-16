@@ -8,12 +8,8 @@ export class BlogResolver {
     @Inject() blogService: BlogService;
 
     @Query(blog => BlogType)
-    blog() {
-        return {
-            id: 1,
-            title: 'Reactjs',
-            description: 'Learn something new'
-        }
+    blog(@Args('id') id: string) {
+        return this.blogService.getBlog(id);
     }
 
     @Query(returns=> [BlogType])
