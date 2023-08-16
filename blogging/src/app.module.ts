@@ -6,6 +6,7 @@ import { join } from 'path';
 import { BlogModule } from './blog/blog.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlogEntity } from './blog/blog.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { BlogEntity } from './blog/blog.entity';
       driver: ApolloDriver,
     }),
     BlogModule,
+    AuthModule,
   ],
   providers: [AppService],
 })
