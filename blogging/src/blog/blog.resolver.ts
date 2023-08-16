@@ -16,8 +16,13 @@ export class BlogResolver {
         }
     }
 
+    @Query(returns=> [BlogType])
+    blogs() {
+        return this.blogService.getBlogs();
+    }
+
     @Mutation(returns => BlogType)
-    async createBlog(@Args('title') title: string, @Args('description') description: string) {
-       return this.blogService.createBlog(title, description);
+    createBlog(@Args('title') title: string, @Args('description') description: string, @Args('image') image: string, @Args('author') author: string) {
+       return this.blogService.createBlog(title, description, image, author);
     }
 }

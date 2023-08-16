@@ -6,12 +6,17 @@ type Blog {
   id: ID!
   title: String!
   description: String!
+  image: String!
+  author: String!
+  created: String
+  modified: String
 }
 
 type Query {
   blog: Blog!
+  blogs: [Blog!]!
 }
 
 type Mutation {
-  createBlog(title: String!, description: String!): Blog!
+  createBlog(title: String!, description: String!, image: String!, author: String!): Blog!
 }

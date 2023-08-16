@@ -9,11 +9,19 @@ import { v4 as uuid } from 'uuid';
 export class BlogService {
     constructor(@InjectRepository(BlogEntity) private blogRepository: Repository<BlogEntity>){}
 
-    async createBlog(title: string, description: string): Promise<BlogEntity> {
+    async getBlogs(): Promise<BlogEntity[]> {
+      return this.blogRepository.find({});
+    }
+
+    async createBlog(title: string, description: string, image: string, author: string): Promise<BlogEntity> {
         const blog = this.blogRepository.create({
             id: uuid(),
             title,
-            description
+            description,
+            image,
+            author,
+            created: new Date().toUTCString(),
+            modified: new Date().toUTCString()
         });
 
         return this.blogRepository.save(blog);
