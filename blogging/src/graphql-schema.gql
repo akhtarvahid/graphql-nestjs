@@ -11,3 +11,7 @@ type Blog {
 type Query {
   blog: Blog!
 }
+
+type Mutation {
+  createBlog(title: String!, description: String!): Blog!
+}
