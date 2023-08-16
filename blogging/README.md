@@ -38,11 +38,47 @@ npm install graphql graphql-tools apollo-server-express @nestjs/graphql @nestjs/
 ```Js 
 nest g module blog --no-spec 
 ```
+4. TypeOrm, mongodb, uuid installation and setup
 
+```Js
+npm install typeorm @nestjs/typeorm mongodb @types/mongodb uuid
+```
+5. Additional validation
 
+```Js
+npm install class-validator --save
+npm install class-transformer
+```
 
+### Auth Module Installation 
 
-## Installation after cloning the application
+1. Create auth module
+
+```Js
+
+// to create module
+nest g module auth --no-spec
+
+// to create service
+nest g service auth --no-spec
+
+// to create resolver
+nest g resolver auth --no-spec
+```
+
+2. Authentication related dependencies
+
+```Js
+npm i jsonwebtoken @nestjs/jwt @nestjs/passport passport-jwt bcrypt
+
+```
+3. add below code inside `app.module.ts` -> `GraphQLModule.forRoot<ApolloDriverConfig>({`
+
+```Js
+context: ({ req }) => ({ headers: req.headers })
+```
+
+## 2. Installation if you cloned application
 
 ```bash
 $ npm install
@@ -74,16 +110,6 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Author - [Vahid Akhtar](https://in.linkedin.com/akhtarvahid)
