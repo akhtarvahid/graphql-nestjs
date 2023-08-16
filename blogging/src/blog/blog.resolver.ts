@@ -21,4 +21,9 @@ export class BlogResolver {
     createBlog(@Args('title') title: string, @Args('description') description: string, @Args('image') image: string, @Args('author') author: string) {
        return this.blogService.createBlog(title, description, image, author);
     }
+
+    @Mutation(returns => BlogType)
+    updateBlog(@Args("id") id: string, @Args('title') title: string, @Args('description') description: string, @Args('image') image: string, @Args('author') author: string) {
+       return this.blogService.updateBlog(id, title, description, image, author);
+    }
 }

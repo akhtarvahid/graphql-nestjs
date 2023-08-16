@@ -29,4 +29,15 @@ export class BlogService {
 
         return this.blogRepository.save(blog);
     }
+
+   async updateBlog(id: string, title: string, description: string, image: string, author: string): Promise<BlogEntity> {
+      const getToUpdate = await this.getBlog(id);
+
+      getToUpdate.title = title;
+      getToUpdate.description = description;
+      getToUpdate.image = image;
+      getToUpdate.author = author;
+
+      return this.blogRepository.save(getToUpdate);
+   }
 }
