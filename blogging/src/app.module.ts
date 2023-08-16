@@ -4,9 +4,19 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { BlogModule } from './blog/blog.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { BlogEntity } from './blog/blog.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      url: 'mongodb://localhost/blogging',
+      synchronize: true,
+      useUnifiedTopology: true,
+      port: 28017,
+      entities: [BlogEntity],
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
       driver: ApolloDriver,
