@@ -27,3 +27,9 @@ export class BlogType {
     @IsOptional()
     modified?: string;
 }
+
+@ObjectType()
+export class DeleteResponse {
+    @Field()
+    message: string;
+}

@@ -1,4 +1,4 @@
-import { Column, Entity, ObjectIdColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ObjectIdColumn } from "typeorm";
 
 @Entity()
 export class AuthEntity {

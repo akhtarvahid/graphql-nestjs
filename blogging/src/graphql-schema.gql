@@ -12,6 +12,10 @@ type Blog {
   modified: String
 }
 
+type DeleteResponse {
+  message: String!
+}
+
 type AuthType {
   username: String!
 }
@@ -28,6 +32,7 @@ type Query {
 type Mutation {
   createBlog(title: String!, description: String!, image: String!, author: String!): Blog!
   updateBlog(id: String!, title: String!, description: String!, image: String!, author: String!): Blog!
+  deleteBlog(id: String!): DeleteResponse!
   signUp(signUp: AuthCreateInput!): AuthType!
   signIn(signIn: AuthCreateInput!): TokenType!
 }

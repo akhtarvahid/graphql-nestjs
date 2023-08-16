@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from "@nestjs/graphql";
-import { BlogType } from "./blog.schema";
+import { BlogType, DeleteResponse } from "./blog.schema";
 import { Inject, UseGuards } from "@nestjs/common";
 import { BlogService } from "./blog.service";
 import { AuthGuard } from "src/auth/auth.guard";
@@ -28,5 +28,11 @@ export class BlogResolver {
     @Mutation(returns => BlogType)
     updateBlog(@Args("id") id: string, @Args('title') title: string, @Args('description') description: string, @Args('image') image: string, @Args('author') author: string) {
        return this.blogService.updateBlog(id, title, description, image, author);
+    }
+
+    @UseGuards(new AuthGuard())
+    @Mutation(returns => DeleteResponse)
+    deleteBlog(@Args('id') id: string) {
+        return this.blogService.deleteBlog(id);
     }
 }

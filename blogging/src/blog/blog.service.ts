@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { BlogEntity } from "./blog.entity";
 import { Repository } from "typeorm";
-import { Args } from "@nestjs/graphql";
 import { v4 as uuid } from 'uuid'; 
+import { DeleteResponse } from "./blog.schema";
 
 @Injectable()
 export class BlogService {
@@ -39,5 +39,14 @@ export class BlogService {
       blog.author = author;
 
       return this.blogRepository.save(blog);
+   }
+
+   async deleteBlog(id: string): Promise<DeleteResponse> {
+      await this.blogRepository.delete({ id });
+      let response = {
+        message: `Blog for (${id}) deleted successfully`
+      }
+
+      return response;
    }
 }
