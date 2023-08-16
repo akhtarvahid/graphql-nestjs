@@ -6,6 +6,7 @@ import { BlogModule } from './blog/blog.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlogEntity } from './blog/blog.entity';
 import { AuthModule } from './auth/auth.module';
+import { AuthEntity } from './auth/auth.entity';
 
 @Module({
   imports: [
@@ -15,11 +16,12 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       useUnifiedTopology: true,
       port: 28017,
-      entities: [BlogEntity],
+      entities: [BlogEntity, AuthEntity],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
       driver: ApolloDriver,
+      context: ({ req }) => ({ headers: req.headers })
     }),
     BlogModule,
     AuthModule,

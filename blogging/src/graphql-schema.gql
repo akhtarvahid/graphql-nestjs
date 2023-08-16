@@ -12,6 +12,14 @@ type Blog {
   modified: String
 }
 
+type AuthType {
+  username: String!
+}
+
+type TokenType {
+  accessToken: String!
+}
+
 type Query {
   blog(id: String!): Blog!
   blogs: [Blog!]!
@@ -20,4 +28,11 @@ type Query {
 type Mutation {
   createBlog(title: String!, description: String!, image: String!, author: String!): Blog!
   updateBlog(id: String!, title: String!, description: String!, image: String!, author: String!): Blog!
+  signUp(signUp: AuthCreateInput!): AuthType!
+  signIn(signIn: AuthCreateInput!): TokenType!
+}
+
+input AuthCreateInput {
+  username: String!
+  password: String!
 }
