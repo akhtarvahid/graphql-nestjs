@@ -11,4 +11,9 @@ export class AuthResolver {
     signUp(@Args('signUp') signUpUser: AuthCreateInput)  {
         return this.authService.createUser(signUpUser);
     }
+
+    @Mutation(_=> TokenType)
+    signIn(@Args('signIn') signIn: AuthCreateInput) {
+        return this.authService.signInUser(signIn);
+    }
 }
