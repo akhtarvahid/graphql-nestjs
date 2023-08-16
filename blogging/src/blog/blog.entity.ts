@@ -13,4 +13,16 @@ export class BlogEntity {
 
     @Column()
     description: string;
+
+    @Column()
+    image: string;
+
+    @Column()
+    author: string;
+
+    @Column()
+    created: string;
+
+    @Column()
+    modified: string;
 }
