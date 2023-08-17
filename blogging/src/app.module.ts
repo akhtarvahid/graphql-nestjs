@@ -5,13 +5,12 @@ import { join } from 'path';
 import { BlogModule } from './blog/blog.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { ConfigModule } from '@nestjs/config';
+import { dataSourceOptions } from 'db/data-source';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
+    TypeOrmModule.forRoot(dataSourceOptions),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
       driver: ApolloDriver,
