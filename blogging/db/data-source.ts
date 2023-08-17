@@ -3,6 +3,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mongodb',
   host: 'localhost',
+  database: 'mongodb',
   port: 28017,
   logging: true,
   synchronize: true,
