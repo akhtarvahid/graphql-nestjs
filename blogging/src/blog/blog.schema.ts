@@ -1,6 +1,5 @@
-import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { Field, ID, InputType, ObjectType } from "@nestjs/graphql";
 import { IsOptional } from "class-validator";
-
 
 @ObjectType('Blog')
 export class BlogType {
@@ -26,6 +25,24 @@ export class BlogType {
     @Field(() => String, { nullable: true })
     @IsOptional()
     modified?: string;
+
+    @Field()
+    userId: string;
+}
+
+@InputType()
+export class CreateBlogInput {
+    @Field()
+    title: string;
+
+    @Field()
+    description: string;
+
+    @Field()
+    image: string;
+
+    @Field()
+    author: string;
 }
 
 @ObjectType()
