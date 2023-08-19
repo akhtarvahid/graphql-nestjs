@@ -18,14 +18,15 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --d src/ormdatasource.ts",
     "db:drop": "npm run typeorm schema:drop",
-    "db:create" : "npm run typeorm migration:generate",
-    "db:migrate" : "npm run typeorm migration:run"
+    "db:create": "npm run typeorm migration:generate",
+    "db:migrate": "npm run typeorm migration:run"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^10.0.0",
+    "bcrypt": "^5.1.1",
     "module-alias": "^2.2.3",
     "nodemon": "^3.0.1",
     "pg": "^8.11.3",
