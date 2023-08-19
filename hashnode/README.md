@@ -89,3 +89,19 @@ docker run --name hashnode -p 5430:5432 -e POSTGRES_PASSWORD=hashnode -e POSTGRE
   - General tab -> `Name`='database_name'
   - Connection tab -> `Host name/address` = 'localhost', `port` = port_number(ex.5432), `Maintenance database` = 'database_name', `username` = 'username_of_database', `password` = 'password_of_database'
   - 
+
+- Migrations
+  To drop tables
+  ```Js
+   npm run db:drop
+  ```
+
+  To generate tables
+  ```Js
+   npm run db:migrate
+  ```
+
+  To create migration
+  ```js
+   npm run db:create src/migrations/add_field_name(ex. createUsers)
+  ```
