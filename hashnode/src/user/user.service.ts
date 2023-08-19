@@ -32,6 +32,14 @@ export class UserService {
         return await this.userRepository.save(newUser);
     }
 
+    async getUserById(id: number): Promise<UserEntity> {
+      return this.userRepository.findOne({
+        where: {
+            id
+        }
+      })
+    }
+
     generateJwt(user: UserEntity): string {
        return sign({
          id: user.id,
