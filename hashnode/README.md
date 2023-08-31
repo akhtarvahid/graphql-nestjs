@@ -101,7 +101,9 @@ docker run --name hashnode -p 5430:5432 -e POSTGRES_PASSWORD=hashnode -e POSTGRE
    npm run db:migrate
   ```
 
-  To create migration
+  To create and deploy migration
   ```js
    npm run db:create src/migrations/add_field_name(ex. createUsers)
+   npm run db:migrate
   ```
+
