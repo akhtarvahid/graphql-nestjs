@@ -1,5 +1,5 @@
 import { AuthGuard } from '@app/user/guards/auth.guard';
-import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post, UseGuards } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { User } from '@app/user/decorators/user.decorator';
 import { CreateArticleDto } from './dto/createArticle.dto';
@@ -18,6 +18,12 @@ export class ArticleController {
         @Body('article') createArticleDto: CreateArticleDto
     ): Promise<ArticleResponseInterface> {
         const article = await this.articleService.create(currentUser, createArticleDto);
+        return this.articleService.buildArticleResponse(article);
+    }
+
+    @Get(':slug')
+    async getArticle(@Param('slug') slug: string): Promise<ArticleResponseInterface> {
+        const article = await this.articleService.findBySlug(slug);
         return this.articleService.buildArticleResponse(article);
     }
 }
