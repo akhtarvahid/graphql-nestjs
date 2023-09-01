@@ -13,6 +13,7 @@ export class ArticleController {
 
     @Post()
     @UseGuards(AuthGuard)
+    @UsePipes(new ValidationPipe())
     async createArticle(
         @User() currentUser: UserEntity, 
         @Body('article') createArticleDto: CreateArticleDto
@@ -35,6 +36,7 @@ export class ArticleController {
 
     @Put(':slug')
     @UseGuards(AuthGuard)
+    @UsePipes(new ValidationPipe())
     async updateArticle(
         @User('id') currentUserId: number, 
         @Param('slug') slug: string, 
