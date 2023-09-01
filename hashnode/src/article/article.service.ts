@@ -10,15 +10,35 @@ import { ArticlesResponseInterface } from './types/articlesResponse.interface';
 
 @Injectable()
 export class ArticleService {
-    constructor(@InjectRepository(ArticleEntity) 
-    private readonly articleRepository: Repository<ArticleEntity>,
-    private dataSource: DataSource
+    constructor(
+     @InjectRepository(ArticleEntity) private readonly articleRepository: Repository<ArticleEntity>,
+     @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+     private dataSource: DataSource
     ){}
 
     async findAll(id: number, query: any): Promise<ArticlesResponseInterface> {
       const queryBuilder = this.dataSource.getRepository(ArticleEntity)
       .createQueryBuilder('articles').leftJoinAndSelect('articles.author', 'author');
 
+      if(query.tag) {
+        queryBuilder.andWhere('articles.tagList LIKE :tag', {
+          tag: `%${query.tag}`,
+        })
+      }
+
+      if(query.author) {
+        const author = await this.userRepository.findOne({
+          where: {
+            username: query.author
+          }
+        });
+
+        queryBuilder.andWhere('articles.authorId = :id', {
+          id: author.id,
+        })
+      }
+
+      queryBuilder.orderBy('articles.createdAt', 'DESC');
       const articlesCount = await queryBuilder.getCount();
 
       if(query.limit) {
