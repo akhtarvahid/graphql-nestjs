@@ -19,8 +19,17 @@ export class ArticleService {
       const queryBuilder = this.dataSource.getRepository(ArticleEntity)
       .createQueryBuilder('articles').leftJoinAndSelect('articles.author', 'author');
 
-      const articles = await queryBuilder.getMany();
       const articlesCount = await queryBuilder.getCount();
+
+      if(query.limit) {
+        queryBuilder.limit(query.limit);
+      }
+
+      if(query.offset) {
+        queryBuilder.offset(query.offset);
+      }
+
+      const articles = await queryBuilder.getMany();
 
        return { articles, articlesCount };
     }
