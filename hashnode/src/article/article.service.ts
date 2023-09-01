@@ -52,4 +52,20 @@ export class ArticleService {
     async findBySlug(slug: string): Promise<ArticleEntity> {
       return await this.articleRepository.findOne({ where: { slug }});
     }
+
+    async updateArticle(id: number, slug: string, updateArticleDto: CreateArticleDto): Promise<ArticleEntity> {
+      const article = await this.findBySlug(slug);
+
+      if(!article) {
+        throw new HttpException('Article does not exist', HttpStatus.NOT_FOUND)
+      }
+      
+      if(article.author.id !== id) {
+        throw new HttpException('You are not an author', HttpStatus.FORBIDDEN);
+      }
+
+      Object.assign(article, updateArticleDto);
+
+      return await this.articleRepository.save(article);
+    }
 }
