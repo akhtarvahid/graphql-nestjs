@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany, JoinTable, ManyToMany } from "typeorm"
 import * as bcrypt from 'bcrypt';
 import { ArticleEntity } from "@app/article/article.entity";
 
@@ -29,4 +29,8 @@ export class UserEntity {
 
     @OneToMany(() => ArticleEntity, (article) => article.author)
     articles: ArticleEntity[]
+
+    @ManyToMany(() => ArticleEntity)
+    @JoinTable()
+    favorites: ArticleEntity[];
 }

@@ -36,7 +36,7 @@ export class ArticleService {
         if(!author) {
           throw new HttpException('Username does not exist', HttpStatus.NOT_FOUND);
         }
-        
+
         queryBuilder.andWhere('articles.authorId = :id', {
           id: author.id,
         })
