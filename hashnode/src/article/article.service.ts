@@ -115,4 +115,23 @@ export class ArticleService {
 
       return await this.articleRepository.save(article);
     }
+
+    async addArticleToFavorites(slug, userId): Promise<ArticleEntity> {
+      const article = await this.findBySlug(slug);
+      const user = await this.userRepository.findOne({
+        where: {id: userId},
+        relations: ['favorites']
+      })
+
+      const isNotFavorite = user.favorites.findIndex((articleExist) => articleExist.id === article.id) === -1;
+
+      if(isNotFavorite) {
+        user.favorites.push(article);
+        article.favoritesCount++;
+        await this.userRepository.save(user);
+        await this.articleRepository.save(article);
+      }
+
+      return article;
+    }
 }
