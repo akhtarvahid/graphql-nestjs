@@ -67,9 +67,24 @@ export class ArticleService {
         queryBuilder.offset(query.offset);
       }
 
-      const articles = await queryBuilder.getMany();
+      let favoriteIds: number[] = [];
+      if(id) {
+        const currentUser = await this.userRepository.findOne({
+          where: { id },
+          relations: ['favorites']
+        })
+        console.log(currentUser)
 
-       return { articles, articlesCount };
+        favoriteIds = currentUser.favorites.map(fav => parseInt(fav.id));
+      }
+
+      const articles = await queryBuilder.getMany();
+      const articleWithFavorited = articles.map(article => {
+        const favorited = favoriteIds.includes(parseInt(article.id));
+        return { ...article, favorited }
+      })
+
+       return { articles: articleWithFavorited, articlesCount };
     }
 
     async create(currentUser: UserEntity, createArticleDto: CreateArticleDto): Promise<ArticleEntity> {
