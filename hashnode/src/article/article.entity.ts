@@ -3,7 +3,7 @@ import { BeforeUpdate, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 
 
 @Entity({ name: "article" })
 export class ArticleEntity {
-    @PrimaryGeneratedColumn()
+   @PrimaryGeneratedColumn()
    id: string;
 
    @Column()
