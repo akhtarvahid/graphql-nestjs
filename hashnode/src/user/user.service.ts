@@ -52,7 +52,7 @@ export class UserService {
          id: user.id,
          username: user.username,
          email: user.email
-       }, JWT_SECRET)
+       }, JWT_SECRET, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) })
     }
     buildUserResponse(user: UserEntity): UserResponseInterface {
       return {
