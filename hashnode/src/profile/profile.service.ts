@@ -22,7 +22,7 @@ export class ProfileService {
     }
 
     buildProfileResponse(profile: ProfileType): ProfileResponseInterface {
-        delete profile.email;
+        delete profile.email; // `email` not required to expose in response.
         return { profile };
     }
 }

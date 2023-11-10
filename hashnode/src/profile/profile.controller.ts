@@ -10,7 +10,8 @@ export class ProfileController {
     @Get(':username')
     async getProfile(
         @User('id') currentUserId: number, 
-        @Param('username') profileUsername: string): Promise<ProfileResponseInterface> {
+        @Param('username') profileUsername: string
+    ): Promise<ProfileResponseInterface> {
           const profile = await this.profileService.getProfile(currentUserId, profileUsername);
           return this.profileService.buildProfileResponse(profile);
     }
