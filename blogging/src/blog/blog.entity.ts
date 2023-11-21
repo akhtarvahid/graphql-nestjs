@@ -1,4 +1,3 @@
-import { IsOptional } from "class-validator";
 import { Column, Entity, ObjectIdColumn, PrimaryColumn } from "typeorm";
 
 @Entity()
@@ -26,4 +25,7 @@ export class BlogEntity {
 
     @Column()
     modified: string;
+
+    @Column()
+    userId: string;
 }

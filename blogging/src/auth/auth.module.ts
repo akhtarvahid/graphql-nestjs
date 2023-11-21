@@ -18,6 +18,6 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     TypeOrmModule.forFeature([AuthEntity])],
   providers: [AuthResolver, AuthService, JwtStrategy],
-  exports: [JwtStrategy, PassportModule]
+  exports: [JwtStrategy, PassportModule, AuthService]
 })
 export class AuthModule {}
