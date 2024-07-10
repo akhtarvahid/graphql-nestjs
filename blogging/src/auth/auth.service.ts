@@ -56,4 +56,14 @@ export class AuthService {
         throw new UnauthorizedException('Please check your login credentials');
       }
     }
+
+    async getUserInfo(request) {
+      const payload = await this.jwtService.verifyAsync(
+        request.headers.authorization.split(' ')[1],
+        {
+          secret: 'topSecret51'
+        }
+      );
+        return payload;
+    }
 }
