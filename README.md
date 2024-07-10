@@ -1,12 +1,21 @@
 # grqphql-nestjs
 
-### Follow Application steps named(instruction.md) created inside all project.
+ Follow Application steps named(instruction.md) created inside all project.
 
 
 # Projects
 
-> Invoice-customer-app
+```js
+// for Invoice-customer-app
+ cd Invoice-customer-app
+Invoice-customer-app> npm i
 
-> Project-crud
 
-> School-management-app
+// for Project-crud
+cd Project-crud
+Project-crud > npm i
+
+// for School-management-app
+cd School-management-app
+School-management-app > npm i
+ ```
