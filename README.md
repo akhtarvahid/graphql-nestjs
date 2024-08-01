@@ -1,9 +1,9 @@
 # grqphql-nestjs
 
- Follow Application steps named(instruction.md) created inside all project.
+### Follow the steps provided in instruction.md inside all project.
 
 
-# Projects
+## Projects
 
 ```js
 // for Invoice-customer-app
