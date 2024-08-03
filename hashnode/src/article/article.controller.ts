@@ -12,6 +12,7 @@ export class ArticleController {
 
     @Inject() articleService: ArticleService;
 
+    // Public get all article API
     @Get()
     async getAllArticle(
         @User('id') currentUserId: number, 
@@ -19,6 +20,7 @@ export class ArticleController {
        return await this.articleService.findAll(currentUserId, query);
     }
 
+    // Private create API
     @Post()
     @UseGuards(AuthGuard)
     @UsePipes(new ValidationPipe())
@@ -30,18 +32,21 @@ export class ArticleController {
         return this.articleService.buildArticleResponse(article);
     }
 
+    // Public get an article API
     @Get(':slug')
     async getArticle(@Param('slug') slug: string): Promise<ArticleResponseInterface> {
         const article = await this.articleService.findBySlug(slug);
         return this.articleService.buildArticleResponse(article);
     }
 
+    // Private delete article API
     @Delete(':slug')
     @UseGuards(AuthGuard)
     async deleteArticle(@User('id') currentUserId: number, @Param('slug') slug: string) {
        return await this.articleService.delete(slug, currentUserId);
     }
 
+    // Private update article API
     @Put(':slug')
     @UseGuards(AuthGuard)
     @UsePipes(new ValidationPipe())
