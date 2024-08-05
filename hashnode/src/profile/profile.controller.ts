@@ -8,6 +8,7 @@ import { AuthGuard } from "@app/user/guards/auth.guard";
 export class ProfileController {
     @Inject() profileService: ProfileService;
 
+    // Get user profile api
     @Get(':username')
     async getProfile(
         @User('id') currentUserId: number, 
@@ -17,6 +18,7 @@ export class ProfileController {
           return this.profileService.buildProfileResponse(profile);
     }
 
+    // Post user-profile follow api
     @Post(':username/follow')
     @UseGuards(AuthGuard)
     async followProfile(
