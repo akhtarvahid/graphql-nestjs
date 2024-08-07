@@ -1,0 +1,146 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /tag:
+    get:
+      operationId: TagController_findAllTags
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /users:
+    post:
+      operationId: UserController_createUser
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  /user:
+    put:
+      operationId: UserController_updateUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+    get:
+      operationId: UserController_currentUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /users/login:
+    post:
+      operationId: UserController_loginUser
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  /articles:
+    get:
+      operationId: ArticleController_getAllArticle
+      parameters: []
+      responses:
+        '200':
+          description: ''
+    post:
+      operationId: ArticleController_createArticle
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  /articles/{slug}:
+    get:
+      operationId: ArticleController_getArticle
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+    delete:
+      operationId: ArticleController_deleteArticle
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+    put:
+      operationId: ArticleController_updateArticle
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+  /articles/{slug}/favorite:
+    post:
+      operationId: ArticleController_articleToFavorites
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+    delete:
+      operationId: ArticleController_deleteArticleFromFavorites
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+  /profiles/{username}:
+    get:
+      operationId: ProfileController_getProfile
+      parameters:
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+  /profiles/{username}/follow:
+    post:
+      operationId: ProfileController_followProfile
+      parameters:
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+info:
+  title: TIP hashnode Service
+  description: A hashnode Service Provider
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas: {}
