@@ -38,6 +38,12 @@ paths:
     post:
       operationId: UserController_loginUser
       parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserDto'
       responses:
         '201':
           description: ''
@@ -143,4 +149,11 @@ info:
 tags: []
 servers: []
 components:
-  schemas: {}
+  schemas:
+    LoginUserDto:
+      type: object
+      properties:
+        password:
+          type: string
+      required:
+        - password
