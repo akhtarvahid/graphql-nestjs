@@ -19,6 +19,9 @@ export class BlogEntity {
     image: string;
 
     @Column()
+    upVotes: number;
+
+    @Column()
     author: string;
 
     @Column()

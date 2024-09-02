@@ -4,20 +4,13 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { BlogModule } from './blog/blog.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BlogEntity } from './blog/blog.entity';
 import { AuthModule } from './auth/auth.module';
-import { AuthEntity } from './auth/auth.entity';
+import { ConfigModule } from '@nestjs/config';
+import { dataSourceOptions } from 'db/data-source';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mongodb',
-      url: 'mongodb://localhost/blogging',
-      synchronize: true,
-      useUnifiedTopology: true,
-      port: 28017,
-      entities: [BlogEntity, AuthEntity],
-    }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
       driver: ApolloDriver,
