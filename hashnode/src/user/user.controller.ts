@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Put, Req, UseGuards, UsePipes, ValidationP
 import { UserService } from '@app/user/user.service';
 import { CreateUserDto } from '@app/user/dto/createUser.dto';
 import { UserResponseInterface } from '@app/user/types/userResponse.interface';
-import { LoginUserDto } from '@app/user/dto/loginUser.dto';
+import { LoginUserDto, UserCredentialsDto } from '@app/user/dto/loginUser.dto';
 import { ExpressRequest } from './types/expressRequest.interface';
 import { User } from './decorators/user.decorator';
 import { AuthGuard } from './guards/auth.guard';
@@ -30,7 +30,7 @@ export class UserController {
     @Post('users/login')
     @ApiBody({ type: LoginUserDto })
     @UsePipes(new ValidationPipe())
-    async loginUser(@Body('user') loginUserDto: LoginUserDto): Promise<UserResponseInterface> {
+    async loginUser(@Body('user') loginUserDto: UserCredentialsDto): Promise<UserResponseInterface> {
        const user = await this.userService.loginUser(loginUserDto);
        return this.userService.buildUserResponse(user);
     }

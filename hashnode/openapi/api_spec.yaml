@@ -150,13 +150,22 @@ tags: []
 servers: []
 components:
   schemas:
-    LoginUserDto:
+    UserCredentialsDto:
       type: object
       properties:
         email:
           type: string
+          example: xyz@gmail.com
         password:
           type: string
+          example: xyz@63
       required:
         - email
         - password
+    LoginUserDto:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserCredentialsDto'
+      required:
+        - user
