@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 import { JWT_SECRET } from '@app/config';
 import { UserResponseInterface } from '@app/user/types/userResponse.interface';
-import { LoginUserDto } from './dto/loginUser.dto';
+import { LoginUserDto, UserCredentialsDto } from './dto/loginUser.dto';
 import { compare } from 'bcrypt';
 import { UpdateUserDto } from './dto/updateUser.dto';
 @Injectable()
@@ -63,7 +63,7 @@ export class UserService {
       };
     }
 
-    async loginUser(loginUserDto: LoginUserDto): Promise<UserEntity> {
+    async loginUser(loginUserDto: UserCredentialsDto): Promise<UserEntity> {
         const user = await this.userRepository.findOne({
             where: {
                 email: loginUserDto.email

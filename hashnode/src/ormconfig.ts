@@ -10,7 +10,5 @@ const config: PostgresConnectionOptions = {
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: false,
     migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-
-
 }
 export default config;
