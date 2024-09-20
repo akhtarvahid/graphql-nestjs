@@ -87,3 +87,13 @@ docker run --name hashnode -p 5430:5432 -e POSTGRES_PASSWORD=hashnode -e POSTGRE
    npm run db:migrate
   ```
 
+### Swagger
+
+Click to Open -> 
+[Swagger](http://localhost:3000/api#/) 
+
+
+### Errors
+
+QueryFailedError: relation "users" does not exist
+> Go to `ormconfig.ts` and make `synchronize: true` then re-run app and try. Once tables created revert `synchronize:false`.
