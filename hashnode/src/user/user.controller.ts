@@ -8,8 +8,9 @@ import { User } from './decorators/user.decorator';
 import { AuthGuard } from './guards/auth.guard';
 import { UserEntity } from './user.entity';
 import { UpdateUserDto } from './dto/updateUser.dto';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 
+@ApiBearerAuth('JWT-auth')
 @Controller()
 export class UserController {
     constructor(private readonly userService: UserService){}

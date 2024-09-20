@@ -15,10 +15,11 @@ import {
 } from "@nestjs/common";
 import { ArticleService } from "./article.service";
 import { User } from "@app/user/decorators/user.decorator";
-import { CreateArticleDto } from "./dto/createArticle.dto";
+import { ArticleDto, CreateArticleDto } from "./dto/createArticle.dto";
 import { UserEntity } from "@app/user/user.entity";
 import { ArticleResponseInterface } from "./types/ArticleResponse.interface";
 import { ArticlesResponseInterface } from "./types/articlesResponse.interface";
+import { ApiBearerAuth, ApiBody } from "@nestjs/swagger";
 
 @Controller("articles")
 export class ArticleController {
@@ -35,6 +36,8 @@ export class ArticleController {
 
   // Private create API
   @Post()
+  @ApiBearerAuth('token')
+  @ApiBody({ type: ArticleDto })
   @UseGuards(AuthGuard)
   @UsePipes(new ValidationPipe())
   async createArticle(

@@ -5,9 +5,14 @@ import * as yaml from 'js-yaml';
 
 export const swaggerConfig = (app: INestApplication): void => {
     const config = new DocumentBuilder()
-        .setTitle('TIP hashnode Service')
-        .setDescription('A hashnode Service Provider')
+        .setTitle('hashnode Service')
+        .setDescription('Hashnode Service Documentation')
         .setVersion('1.0')
+        .addBearerAuth(
+            { type: 'http', in: 'header', bearerFormat: 'JWT', scheme: 'Bearer', name: 'Authorization' },
+            'token',
+          )
+        
         .build();
     const document = SwaggerModule.createDocument(app, config);
 
@@ -15,7 +20,7 @@ export const swaggerConfig = (app: INestApplication): void => {
     if (!fs.existsSync(openapiDir)) {
         fs.mkdirSync(openapiDir);
     }
-    fs.writeFileSync(`${openapiDir}/api_spec.yaml`, yaml.dump(document));
+    fs.writeFileSync(`${openapiDir}/swagger.yaml`, yaml.dump(document));
 
     SwaggerModule.setup('api', app, document);
 };
