@@ -21,6 +21,8 @@ paths:
       responses:
         '201':
           description: ''
+      security: &ref_0
+        - JWT-auth: []
   /user:
     put:
       operationId: UserController_updateUser
@@ -28,12 +30,14 @@ paths:
       responses:
         '200':
           description: ''
+      security: *ref_0
     get:
       operationId: UserController_currentUser
       parameters: []
       responses:
         '200':
           description: ''
+      security: *ref_0
   /users/login:
     post:
       operationId: UserController_loginUser
@@ -47,6 +51,7 @@ paths:
       responses:
         '201':
           description: ''
+      security: *ref_0
   /articles:
     get:
       operationId: ArticleController_getAllArticle
@@ -57,9 +62,17 @@ paths:
     post:
       operationId: ArticleController_createArticle
       parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleDto'
       responses:
         '201':
           description: ''
+      security:
+        - token: []
   /articles/{slug}:
     get:
       operationId: ArticleController_getArticle
@@ -142,21 +155,65 @@ paths:
         '201':
           description: ''
 info:
-  title: TIP hashnode Service
-  description: A hashnode Service Provider
+  title: hashnode Service
+  description: Hashnode Service Documentation
   version: '1.0'
   contact: {}
 tags: []
 servers: []
 components:
+  securitySchemes:
+    token:
+      scheme: Bearer
+      bearerFormat: JWT
+      type: http
+      in: header
+      name: Authorization
   schemas:
-    LoginUserDto:
+    UserCredentialsDto:
       type: object
       properties:
         email:
           type: string
+          example: xyz@gmail.com
         password:
           type: string
+          example: xyz@63
       required:
         - email
         - password
+    LoginUserDto:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserCredentialsDto'
+      required:
+        - user
+    CreateArticleDto:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Title of blog
+        description:
+          type: string
+          example: Shot description of blog
+        body:
+          type: string
+          example: Detail about the blog
+        tagList:
+          type: string
+          example:
+            - blogTag1
+      required:
+        - title
+        - description
+        - body
+        - tagList
+    ArticleDto:
+      type: object
+      properties:
+        article:
+          $ref: '#/components/schemas/CreateArticleDto'
+      required:
+        - article
